@@ -8,6 +8,6 @@ const UserRoute = express.Router();
 // create subroute and their controller
 UserRoute.route("/register").post(Register);
 
-UserRoute.route("/login").get(Login);
+UserRoute.route("/login").post(Login);
 
 export default UserRoute;
