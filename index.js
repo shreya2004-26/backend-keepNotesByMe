@@ -3,6 +3,7 @@ import express from "express";
 import connectDB from "./config/database.js";
 import cors from "cors";
 import UserRoute from "./routes/UserRoute.js";
+import NotesRoute from "./routes/NotesRoute.js";
 
 // create an instance of the express application
 const app = express();
@@ -26,6 +27,7 @@ connectDB();
 
 // register routes
 app.use("/api", UserRoute);
+app.use("/api/notes", NotesRoute);
 
 //start the server and listen to the port
 app.listen(port, () => {
