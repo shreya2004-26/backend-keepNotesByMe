@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  notes: [{ tile: String, description: String }],
+  notes: [{ title: String, description: String }],
 });
 
 // create the model

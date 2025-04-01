@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
 
     // Check if email and password are provided
     if (!email || !password) {
@@ -26,9 +27,9 @@ const Login = async (req, res) => {
     }
 
     // Compare password with stored hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    // const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordValid) {
+    if (password !== user.password) {
       return res.status(400).json({
         message: "Invalid credentials",
         success: false,
