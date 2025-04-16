@@ -2,12 +2,14 @@ import Users from "../Models/Users.js";
 
 const AddNotes = async (req, res) => {
   try {
-    console.log(req.body);
-
     //get the data from frontend
-    const { email, title, description } = req.body;
-    //get the use
-    const user = await Users.findOne({ email });
+    console.log(req);
+
+    const { title, description } = req.body;
+    //get the user id
+    const userID = req.id;
+    //get the user
+    const user = await Users.findOne({ _id: userID });
     //add the notes
     user.notes = [...user.notes, { title, description }];
     // save user

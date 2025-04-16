@@ -5,9 +5,9 @@ const DeleteNotes = async (req, res) => {
   try {
     console.log(req.query); // Debugging
 
-    const { id, email } = req.query; // Get note ID & user email
+    const { id } = req.query; // Get note ID & user email
 
-    if (!id || !email) {
+    if (!id) {
       return res
         .status(400)
         .json({ message: "ID and Email are required", success: false });
@@ -15,7 +15,7 @@ const DeleteNotes = async (req, res) => {
 
     // Find the user by email
     const updatedUser = await Users.findOneAndUpdate(
-      { email },
+      { _id: req.id },
       { $pull: { notes: { _id: id } } }, // Removes the note with matching ID
       { new: true } // Returns updated user
     );

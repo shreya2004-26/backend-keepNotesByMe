@@ -1,6 +1,6 @@
 import Users from "../Models/Users.js";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
 const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -37,11 +37,23 @@ const Login = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      message: "User logged in successfully",
-      success: true,
-      data: user,
-    });
+    //if all things are going correct, then we generate token
+    const token = await jwt.sign({ id: user._id }, "mynameisshreyasingh", {
+      expiresIn: "2h",
+    }); //unique id,secret key and expiry time
+    //save in cookie
+    return res
+      .cookie("token", token, {
+        maxAge: 24 * 60 * 60 * 1000, //1 day in millisecond
+        // httpOnly: true,
+      })
+      .status(200)
+      .json({
+        message: "User logged in successfully",
+        success: true,
+        data: user,
+        token,
+      });
   } catch (err) {
     return res.status(500).json({
       message: "Internal server error",

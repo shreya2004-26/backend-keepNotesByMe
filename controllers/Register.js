@@ -7,13 +7,6 @@ const Register = async (req, res) => {
     const { name, email, password } = req.body;
 
     // validate input data
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        message: "All fields are required",
-        data: null,
-        success: false,
-      });
-    }
     console.log(req.body);
 
     // check user is already present or not

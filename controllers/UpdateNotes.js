@@ -4,20 +4,16 @@ const UpdateNotes = async (req, res) => {
   try {
     console.log(req.body);
 
-    const { id, email, title, description } = req.body; // Extract values from the request body
+    const { id, title, description } = req.body; // Extract values from the request body
 
-    if (!id || !email || !title || !description) {
+    if (!id || !title || !description) {
       return res
         .status(400)
-        .json({ error: "id, email, title and description are required" });
+        .json({ error: "id, title and description are required" });
     }
 
     // Find the user
-    const user = await Users.findOne({ email });
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
+    const user = await Users.findOne({ _id: req.id });
 
     // Find and update the note inside the user's notes array
     let noteFound = false;
