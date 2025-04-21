@@ -18,7 +18,7 @@ const isAuth = async (req, res, next) => {
     }
     //decode token
     //get the id of logged in user
-    const decode = await jwt.verify(token, "mynameisshreyasingh");
+    const decode = await jwt.verify(token, process.env.JWT_SECRET_KEY);
     console.log(decode);
     //set the user in the request
     const id = decode?.id;

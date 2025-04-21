@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-
-const MONGODB_URL =
-  "mongodb+srv://neeva02singh:Shreya123@ecommerce.gfwk7yp.mongodb.net/myDatabase?retryWrites=true&w=majority";
+import dotenv from "dotenv";
+dotenv.config();
+const MONGODB_URL = process.env.MONGODB_URL;
 
 const connectDB = async () => {
   try {

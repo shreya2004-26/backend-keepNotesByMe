@@ -5,6 +5,8 @@ import cors from "cors";
 import UserRoute from "./routes/UserRoute.js";
 import NotesRoute from "./routes/NotesRoute.js";
 import isAuth from "./middleware/isAuth.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 // create an instance of the express application
 const app = express();
@@ -16,9 +18,11 @@ const port = 8000;
 app.use(express.json());
 
 // to enable cross origin resourse sharing
+console.log(process.env.FRONTEND_SERVER);
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // or wherever your frontend is//it will sharing resource only on this url
+    origin: process.env.FRONTEND_SERVER, // or wherever your frontend is//it will sharing resource only on this url
     credentials: true, // <-- VERY IMPORTANT//it will store cookies in this particular url
   })
 );
